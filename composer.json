@@ -16,6 +16,11 @@
       "CedricBlondeau\\Moneris\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "CedricBlondeau\\Moneris\\Tests\\": "tests/"
+    }
+  },
   "authors": [
     {
       "name": "Cédric Blondeau",
