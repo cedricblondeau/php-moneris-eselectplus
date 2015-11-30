@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         backupGlobals="false"
+         colors="true">
+    <testsuites>
+        <func name="Functional tests suite">
+            <directory>./tests/functional</directory>
+        </func>
+        <unit name="Unit tests suite">
+            <directory>./tests/unit</directory>
+        </unit>
+    </testsuites>
+</phpunit>
