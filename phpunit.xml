@@ -5,11 +5,11 @@
          backupGlobals="false"
          colors="true">
     <testsuites>
-        <func name="Functional tests suite">
+        <testsuite name="Functional tests suite">
             <directory>./tests/functional</directory>
-        </func>
-        <unit name="Unit tests suite">
+        </testsuite>
+        <testsuite name="Unit tests suite">
             <directory>./tests/unit</directory>
-        </unit>
+        </testsuite>
     </testsuites>
 </phpunit>
