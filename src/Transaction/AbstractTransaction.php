@@ -6,6 +6,11 @@ use CedricBlondeau\Moneris\Config;
 abstract class AbstractTransaction
 {
     /**
+     * @var string
+     */
+    private $type;
+
+    /**
      * @var Config
      */
     private $config;
@@ -13,7 +18,7 @@ abstract class AbstractTransaction
     /**
      * @var array
      */
-    private $params;
+    protected $params;
 
     /**
      * @var array
@@ -27,8 +32,8 @@ abstract class AbstractTransaction
      */
     protected function __construct($type, Config $config, array $params)
     {
+        $this->type = $type;
         $this->config = $config;
-        $params['type'] = $type;
         $this->params = $this->prepare($params);
     }
 
@@ -64,6 +69,9 @@ abstract class AbstractTransaction
         if (isset($params['amount']) && false === strpos($params['amount'], '.')) {
             $params['amount'] .= '.00';
         }
+        if (isset($params['comp_amount']) && false === strpos($params['comp_amount'], '.')) {
+            $params['comp_amount'] .= '.00';
+        }
 
         if (isset($params['cc_number'])) {
             $params['pan'] = preg_replace('/\D/', '', $params['cc_number']);
@@ -84,6 +92,8 @@ abstract class AbstractTransaction
     }
 
     /**
+     * Make sure all parameters are passed
+     *
      * @return array
      */
     public function validate()
@@ -102,17 +112,15 @@ abstract class AbstractTransaction
      */
     public function getXml()
     {
-        $request_type = in_array($this->params['type'], array('txn', 'acs')) ? 'MpiRequest' : 'request';
+        $request_type = in_array($this->type, array('txn', 'acs')) ? 'MpiRequest' : 'request';
         $xml = new \SimpleXMLElement("<$request_type/>");
         $xml->addChild('store_id', $this->config->getStoreId());
         $xml->addChild('api_token', $this->config->getApiKey());
-        $type = $xml->addChild($this->params['type']);
-        $type->addChild('crypt_type', $this->config->getCryptType());
+        $type = $xml->addChild($this->type);
         foreach ($this->params as $key => $value) {
-            if ($key != 'type') {
-                $type->addChild($key, $value);
-            }
+            $type->addChild($key, $value);
         }
+        $type->addChild('crypt_type', $this->config->getCryptType());
         return $xml;
     }
 }
