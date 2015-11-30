@@ -2,21 +2,21 @@
 namespace CedricBlondeau\Moneris\Tests\Http\Client;
 
 use CedricBlondeau\Moneris\Config;
-use CedricBlondeau\Moneris\Http\Client\Null;
+use CedricBlondeau\Moneris\Http\Client\Dummy;
 use CedricBlondeau\Moneris\Transaction\Basic\Purchase;
 
-final class NullTest extends \PHPUnit_Framework_TestCase
+final class DummyTest extends \PHPUnit_Framework_TestCase
 {
     public function testLiveGetUrl()
     {
-        $nullHttpClient = new Null($this->getPurchaseTransaction($this->getLiveConfig()));
+        $nullHttpClient = new Dummy($this->getPurchaseTransaction($this->getLiveConfig()));
         $url = parse_url($nullHttpClient->getUrl());
         $this->assertEquals("www3.moneris.com", $url['host']);
     }
 
     public function testStagingGetUrl()
     {
-        $nullHttpClient = new Null($this->getPurchaseTransaction($this->getStagingConfig()));
+        $nullHttpClient = new Dummy($this->getPurchaseTransaction($this->getStagingConfig()));
         $url = parse_url($nullHttpClient->getUrl());
         $this->assertEquals("esqa.moneris.com", $url['host']);
     }
