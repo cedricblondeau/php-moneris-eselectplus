@@ -6,7 +6,7 @@ This library was initially a fork of [ironkeith/moneris-eselectplus-api](https:/
 ### Motivation
 I needed to integrate Moneris with a nice and modern PHP project and did not want to include the awful source code they provide.
 
-[Keith Silgard][https://github.com/ironkeith] did an awesome job by writing an alternative library but I wanted something with namespace and PSR-4 support and his library needed some refactoring, so I decided to [fork it](https://github.com/cedricblondeau/moneris-eselectplus-api/tree/dev) and finally, to fully redesign and rewrite it for PHP 5.3+.
+[https://github.com/ironkeith](Keith Silgard) did an awesome job by writing an alternative library but I wanted something with namespace and PSR-4 support and his library needed some refactoring, so I decided to [fork it](https://github.com/cedricblondeau/moneris-eselectplus-api/tree/dev) and finally, to fully redesign and rewrite it for PHP 5.3+.
 
 ### Usage example
 ```php
