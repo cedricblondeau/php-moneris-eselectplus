@@ -52,50 +52,15 @@ final class Config
      */
     private $cryptType = 7;
 
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data)
-    {
-        $this->setData($data);
-    }
 
     /**
-     * @param array $data
-     * @return bool
+     * @param $api_key
+     * @param $store_id
      */
-    private function validateData(array $data)
+    public function __construct($api_key, $store_id)
     {
-        // API key and Store ID are mandatory parameters
-        if (isset($data['api_key']) && $data['api_key']
-            && isset($data['store_id']) && $data['store_id']
-        ) {
-            // Environment is not mandatory but must be ENV_LIVE, ENV_STAGING or ENV_TESTING
-            if (isset($data['environment'])
-                && !in_array($data['environment'], array(self::ENV_LIVE, self::ENV_STAGING, self::ENV_TESTING))) {
-                return false;
-            }
-            
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * @param array $data
-     */
-    public function setData(array $data)
-    {
-        if ($this->validateData($data)) {
-            $this->setApiKey($data['api_key']);
-            $this->setStoreId($data['store_id']);
-            if (isset($data['environment'])) {
-                $this->setEnvironment($data['environment']);
-            }
-        } else {
-            throw new \RuntimeException("Invalid array");
-        }
+        $this->setApiKey($api_key);
+        $this->setStoreId($store_id);
     }
 
     /**
@@ -109,7 +74,7 @@ final class Config
     /**
      * @param string $apiKey
      */
-    public function setApiKey($apiKey)
+    private function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
     }
@@ -125,7 +90,7 @@ final class Config
     /**
      * @param int $storeId
      */
-    public function setStoreId($storeId)
+    private function setStoreId($storeId)
     {
         $this->storeId = $storeId;
     }
@@ -143,7 +108,10 @@ final class Config
      */
     public function setEnvironment($environment)
     {
-        $this->environment = $environment;
+        if (in_array($environment, array(self::ENV_LIVE, self::ENV_STAGING, self::ENV_TESTING)))
+        {
+            $this->environment = $environment;
+        }
     }
 
     /**

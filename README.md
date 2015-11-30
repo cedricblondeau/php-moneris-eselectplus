@@ -11,11 +11,8 @@ I needed to integrate Moneris with a nice and modern PHP project and did not wan
 ### Usage example
 ```php
 // Config
-$config = new \CedricBlondeau\Moneris\Config(array(
-    'api_key' => 'yesguy',
-    'store_id' => 'store1',
-    'environment' => Config::ENV_TESTING
-));
+$config = new Config('test_api_key', 'store1');
+$config->setEnvironment(Config::ENV_TESTING);
 
 // Purchase transaction
 $transaction = new \CedricBlondeau\Moneris\Transaction\Basic\Purchase($config, array(

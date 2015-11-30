@@ -34,19 +34,15 @@ final class DummyTest extends \PHPUnit_Framework_TestCase
 
     private function getLiveConfig()
     {
-        return new Config(array(
-            'api_key' => 'test_api_key',
-            'store_id' => 99,
-            'environment' => Config::ENV_LIVE
-        ));
+        $config = new Config('test_api_key', 'store1');
+        $config->setEnvironment(Config::ENV_LIVE);
+        return $config;
     }
 
     private function getStagingConfig()
     {
-        return new Config(array(
-            'api_key' => 'test_api_key',
-            'store_id' => 99,
-            'environment' => Config::ENV_STAGING
-        ));
+        $config = new Config('test_api_key', 'store2');
+        $config->setEnvironment(Config::ENV_STAGING);
+        return $config;
     }
 }

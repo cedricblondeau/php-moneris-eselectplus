@@ -23,11 +23,9 @@ final class PurchaseTest extends \PHPUnit_Framework_TestCase
 
     private function getTestConfig()
     {
-        return new Config(array(
-            'api_key' => 'test_api_key',
-            'store_id' => 99,
-            'environment' => Config::ENV_TESTING
-        ));
+        $config = new Config('test_api_key', 'store1');
+        $config->setEnvironment(Config::ENV_TESTING);
+        return $config;
     }
 
     private function getPurchaseParams()
@@ -40,5 +38,4 @@ final class PurchaseTest extends \PHPUnit_Framework_TestCase
             'amount' => 100
         );
     }
-
 }
