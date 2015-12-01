@@ -54,13 +54,13 @@ final class Config
 
 
     /**
-     * @param $api_key
-     * @param $store_id
+     * @param $apiKey
+     * @param $storeId
      */
-    public function __construct($api_key, $store_id)
+    public function __construct($apiKey, $storeId)
     {
-        $this->setApiKey($api_key);
-        $this->setStoreId($store_id);
+        $this->setApiKey($apiKey);
+        $this->setStoreId($storeId);
     }
 
     /**
