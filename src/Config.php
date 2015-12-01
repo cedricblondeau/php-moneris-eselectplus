@@ -50,7 +50,7 @@ final class Config
     /**
      * @var int
      */
-    private $cryptType = 7;
+    private $cryptType = 7; // SSL enabled merchant
 
 
     /**
@@ -191,6 +191,9 @@ final class Config
      */
     public function setCryptType($cryptType)
     {
-        $this->cryptType = $cryptType;
+        if (is_int($cryptType) && $cryptType >= 1 && $cryptType <= 7)
+        {
+            $this->cryptType = $cryptType;
+        }
     }
 }

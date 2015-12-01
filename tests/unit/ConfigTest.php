@@ -49,4 +49,17 @@ final class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->setRequireCvd(true);
         $this->assertEquals(true, $config->isRequireCvd());
     }
+
+    /**
+     * @depends testConstructor
+     * @param Config $config
+     */
+    public function testSetCrypt(Config $config)
+    {
+        $config->setCryptType(3);
+        $this->assertEquals(3, $config->getCryptType());
+        $config->setCryptType(19); // Invalid value
+        $this->assertEquals(3, $config->getCryptType());
+
+    }
 }
