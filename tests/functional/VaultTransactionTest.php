@@ -21,6 +21,7 @@ final class VaultTransactionTest extends BaseTest
         if (count($errors) == 0) {
             $xml = $this->getCurlResponse($transaction);
             $this->assertEquals("027", $xml->receipt->ResponseCode);
+            $this->assertNotNull($xml->receipt->TransID);
         }
     }
 
