@@ -12,8 +12,6 @@ final class PurchaseTest extends \PHPUnit_Framework_TestCase
         $params = $this->getPurchaseParams();
         $purchaseTransaction = new Purchase($config, $params);
         $xml = $purchaseTransaction->getXml();
-        $this->assertEquals($config->getApiKey(), (string) $xml->api_token);
-        $this->assertEquals($config->getStoreId(), (string) $xml->store_id);
         $this->assertTrue(isset($xml->purchase));
         $this->assertEquals($config->getCryptType(), (string) $xml->purchase->crypt_type);
         $this->assertEquals($params['order_id'], (string) $xml->purchase->order_id);
