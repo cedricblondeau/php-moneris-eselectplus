@@ -1,6 +1,7 @@
 {
   "name": "cedricblondeau/php-moneris-eselectplus",
   "description": "An alternative and modern way to access the Moneris eSELECTplus API with PHP 5.3+.",
+  "version": "1.0.0",
   "keywords": ["moneris", "eSELECTplus"],
   "homepage": "https://github.com/cedricblondeau/php-moneris-eselectplus",
   "license": "MIT",
