@@ -29,12 +29,14 @@ final class BasicTransactionTest extends BaseTest
 
     public function testPreAuth()
     {
+        $orderId = 'T' . date("dmy-G:i:s");
+        $amount = 100;
         $transaction = new PreAuth($this->getConfig(), array(
             'cc_number' => '5454545454545454',
             'expiry_month' => 10,
             'expiry_year' => 18,
-            'order_id' => 'test' . date("dmy-G:i:s"),
-            'amount' => 100
+            'order_id' => $orderId,
+            'amount' =>$amount
         ));
         $errors = $transaction->validate();
         $this->assertEquals(0, count($errors));
@@ -43,27 +45,27 @@ final class BasicTransactionTest extends BaseTest
             $this->assertNotNull($xml->receipt);
             $this->assertNotNull($xml->receipt->TransID);
             $this->assertEquals("027", $xml->receipt->ResponseCode);
-            return $xml->receipt->TransID;
+            return array(
+                'txn_number' => $xml->receipt->TransID,
+                'order_id' => $orderId,
+                'comp_amount' => $amount
+            );
         }
     }
 
     /**
-     * @param $transactionId
+     * @param array $params
      * @depends testPreAuth
      */
-    public function testCapture($transactionId)
+    public function testCapture(array $params)
     {
-        if ($transactionId) {
-            $transaction = new Capture($this->getConfig(), array(
-                'txn_number' => $transactionId,
-                'order_id' => 'test' . date("dmy-G:i:s"),
-                'comp_amount' => 100
-            ));
-            $errors = $transaction->validate();
-            $this->assertEquals(0, count($errors));
-            if (count($errors) == 0) {
-                $xml = $this->getCurlResponse($transaction);
-            }
+        $transaction = new Capture($this->getConfig(), $params);
+        $errors = $transaction->validate();
+        $this->assertEquals(0, count($errors));
+        if (count($errors) == 0) {
+            $xml = $this->getCurlResponse($transaction);
+            $this->assertNotNull($xml->receipt);
+            $this->assertEquals("027", $xml->receipt->ResponseCode);
         }
     }
 

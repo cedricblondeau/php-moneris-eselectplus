@@ -65,7 +65,7 @@ abstract class AbstractTransaction
             }
         }
 
-        // amount has to include a penny value, or the transaction will fail:
+        // Amount has to include a penny value, or the transaction will fail
         if (isset($params['amount']) && false === strpos($params['amount'], '.')) {
             $params['amount'] .= '.00';
         }
@@ -83,7 +83,9 @@ abstract class AbstractTransaction
             unset($params['description']);
         }
 
+        // Build expdate from expiry_month/expiry_year
         if (isset($params['expiry_month']) && isset($params['expiry_year']) && ! isset($params['expdate'])) {
+            if (strlen($params['expiry_year']) == 4) $params['expiry_year'] = substr($params['expiry_year'], 2, 2);
             $params['expdate'] = sprintf('%02d%02d', $params['expiry_year'], $params['expiry_month']);
             unset($params['expiry_year'], $params['expiry_month']);
         }
