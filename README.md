@@ -1,7 +1,7 @@
 # php-moneris-eselectplus [![Build Status](https://travis-ci.org/cedricblondeau/php-moneris-eselectplus.svg)](https://travis-ci.org/cedricblondeau/php-moneris-eselectplus)
 An alternative and modern way to access the Moneris eSELECTplus API with PHP 5.3+.
 
-This library was initially a fork of [ironkeith/moneris-eselectplus-api](https://github.com/ironkeith/moneris-eselectplus-api). Still in early development.
+This library was initially a fork of [ironkeith/moneris-eselectplus-api](https://github.com/ironkeith/moneris-eselectplus-api).
 
 ### Motivation
 I needed to integrate Moneris with a nice and modern PHP project and did not want to include the source code they provide.
