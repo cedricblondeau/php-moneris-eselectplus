@@ -10,12 +10,14 @@ I needed to integrate Moneris with a nice and modern PHP project and did not wan
 
 ### Usage example
 ```php
+use CedricBlondeau\Moneris;
+
 // Config
 $config = new Config('test_api_key', 'store1');
 $config->setEnvironment(Config::ENV_TESTING);
 
 // Purchase transaction
-$transaction = new \CedricBlondeau\Moneris\Transaction\Basic\Purchase($config, array(
+$transaction = new Moneris\Transaction\Basic\Purchase($config, array(
     'cc_number' => '4242424242424242',
     'expiry_month' => 10,
     'expiry_year' => 18,
@@ -24,6 +26,6 @@ $transaction = new \CedricBlondeau\Moneris\Transaction\Basic\Purchase($config, a
 ));
 
 // CURL
-$httpClient = new \CedricBlondeau\Moneris\Http\Client\Curl($transaction);
+$httpClient = new Moneris\Http\Client\Curl($transaction);
 $result = $httpClient->execute();
 ```
